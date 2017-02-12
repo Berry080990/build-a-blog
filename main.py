@@ -12,9 +12,12 @@ class Blog(db.Model):
     created = db.DateTimeProperty(auto_now_add = True)
     body = db.StringProperty(required = True)
 
+
 class ViewPostHandler(webapp2.RequestHandler):
     def get(self, id):
-        Blog.get_by_id(int(id))
+        blog = Blog.get_by_id(int(id))
+
+        self.response.write("<h3>" + blog.title +"</h3>"+ "<br>" + "<br>" + blog.body)
 
 class Handler(webapp2.RequestHandler):
     def renderError(self, error_code):
